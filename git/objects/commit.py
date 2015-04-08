@@ -31,6 +31,7 @@ from time import (
                 )
 import os
 import sys
+import codecs
 
 __all__ = ('Commit', )
 
@@ -433,7 +434,12 @@ class Commit(base.Object, Iterable, Diffable, Traversable, Serializable):
         enc = readline()
         enc = enc.strip()
         if enc:
-            self.encoding = enc[enc.find(' ')+1:]
+            enc = enc[enc.find(' ')+1:]
+            try:
+                codecs.lookup(enc)
+                self.encoding = enc
+            except LookupError:
+                print >> sys.stderr, "Bad encoding, '%s', supplied in commit %s" % (enc, self.hexsha)
             # now comes the message separator
             readline()
         # END handle encoding
