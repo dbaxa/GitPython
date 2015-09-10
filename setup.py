@@ -63,7 +63,7 @@ def _stamp_version(filename):
 
 setup(name = "GitPython",
       cmdclass={'build_py': build_py, 'sdist': sdist},
-      version = VERSION,
+      version = "0.3.2rc1-atlassian",
       description = "Python Git Library",
       author = "Sebastian Thiel, Michael Trier",
       author_email = "byronimo@gmail.com, mtrier@gmail.com",
